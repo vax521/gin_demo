@@ -1,4 +1,4 @@
-package main
+package bloomFilter
 
 import (
 	"fmt"
@@ -62,13 +62,15 @@ func main() {
 	str2 := "A happy day"
 	filter.add(str2)
 	fmt.Println(filter.set)
-	str3 := "Greate wall"
+	str3 := "Greate wlla"
 	filter.add(str3)
 	fmt.Println(filter.set)
 	fmt.Println(filter.contains(str1))
 	fmt.Println(filter.contains(str2))
 	fmt.Println(filter.contains(str3))
 	fmt.Println(filter.contains("blockchain technology"))
+	//哈希函数有问题，打乱顺序还在里面
+	fmt.Println(filter.contains("Greate wlla"))
 }
 
 //原文链接：https://blog.csdn.net/liuzhijun301/article/details/83040178
