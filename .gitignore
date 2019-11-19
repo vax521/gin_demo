@@ -1,5 +1,5 @@
-     .idea
-     *.iml
-     *.ipr
-     *.iws
-     out
+.idea
+*.iml
+*.ipr
+*.iws
+out
