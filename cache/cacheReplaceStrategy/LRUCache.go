@@ -14,25 +14,27 @@ func NewLRUCache(cap int) *LRUCache {
 	return &LRUCache{capacity: cap, data: make([]int, 0)}
 }
 
+/**
+  核心思想：最近被访问的将来被访问的几率也更大
+步骤：
+     1. 新数据插入到链表头部；
+    2. 每当缓存命中（即缓存数据被访问,需要遍历链表），则将数据移到链表头部；
+    3. 当链表满的时候，将链表尾部的数据丢弃。
+*/
 func (s *LRUCache) AddHead(dataItem int) error {
 	tempSlice := []int{dataItem}
 	if s.contains(dataItem) {
 		if s.data[0] != dataItem {
 			s.data = s.moveItemToHead(dataItem)
-			fmt.Println(s.data)
-		} else {
-			fmt.Println(s.data)
 		}
 		return nil
 	} else {
 		if len(s.data) < s.capacity {
 			s.data = append(tempSlice, s.data...)
-			fmt.Println(s.data)
 			return nil
 		} else if len(s.data) == s.capacity {
 			tempSlice := []int{dataItem}
 			s.data = append(tempSlice, s.data[:len(s.data)-1]...)
-			fmt.Println(s.data)
 			return nil
 		} else {
 			return errors.New("out of index")
@@ -82,6 +84,7 @@ func main() {
 	for _, input := range inputItem {
 		fmt.Println(input)
 		lruCache.AddHead(input)
+		fmt.Println(lruCache.data)
 	}
 
 }
