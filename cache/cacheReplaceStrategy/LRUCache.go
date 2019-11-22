@@ -11,20 +11,28 @@ type LRUCache struct {
 }
 
 func NewLRUCache(cap int) *LRUCache {
-	return &LRUCache{capacity: cap, data: make([]int, cap)}
+	return &LRUCache{capacity: cap, data: make([]int, 0)}
 }
 
 func (s *LRUCache) AddHead(dataItem int) error {
-	tempSlice := make([]int, 1)
-	tempSlice = append(tempSlice, dataItem)
+	tempSlice := []int{dataItem}
 	if s.contains(dataItem) {
 		if s.data[0] != dataItem {
-			s.moveItemToHead(dataItem)
+			s.data = s.moveItemToHead(dataItem)
+			fmt.Println(s.data)
+		} else {
+			fmt.Println(s.data)
 		}
 		return nil
 	} else {
 		if len(s.data) < s.capacity {
 			s.data = append(tempSlice, s.data...)
+			fmt.Println(s.data)
+			return nil
+		} else if len(s.data) == s.capacity {
+			tempSlice := []int{dataItem}
+			s.data = append(tempSlice, s.data[:len(s.data)-1]...)
+			fmt.Println(s.data)
 			return nil
 		} else {
 			return errors.New("out of index")
@@ -35,18 +43,15 @@ func (s *LRUCache) AddHead(dataItem int) error {
 
 func (s *LRUCache) moveItemToHead(dataItem int) []int {
 	itemIndex := s.indexOf(dataItem)
-	sliceTemp := s.removeItemByIndex(itemIndex)
-	tempSlice := make([]int, 1)
-	tempSlice = append(tempSlice, dataItem)
-	return append(tempSlice, sliceTemp...)
+	rmSlice := s.removeItemByIndex(itemIndex)
+	tempSlice := []int{dataItem}
+	return append(tempSlice, rmSlice...)
 }
 
 func (s *LRUCache) indexOf(dataItem int) int {
 	for index, value := range s.data {
 		if value == dataItem {
 			return index
-		} else {
-			return -1
 		}
 	}
 	return -1
@@ -54,15 +59,15 @@ func (s *LRUCache) indexOf(dataItem int) int {
 
 //删除函数
 func (s *LRUCache) removeItemByIndex(i int) []int {
-	return append(s.data[:len(s.data)-1], s.data[len(s.data):]...)
+	return append(s.data[:i], s.data[i+1:]...)
 }
 
 func (s *LRUCache) contains(dataItem int) bool {
 	if s.data == nil || len(s.data) == 0 {
 		return false
 	} else {
-		for item := range s.data {
-			if item == dataItem {
+		for _, value := range s.data {
+			if value == dataItem {
 				return true
 			}
 		}
@@ -75,9 +80,8 @@ func main() {
 	inputItem := []int{1, 2, 3, 4, 5, 5, 5, 4, 3, 2, 1, 1, 1, 3, 1}
 
 	for _, input := range inputItem {
-		lruCache.AddHead(input)
 		fmt.Println(input)
-		fmt.Println(lruCache.data)
+		lruCache.AddHead(input)
 	}
 
 }
