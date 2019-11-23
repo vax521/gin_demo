@@ -61,6 +61,7 @@ func (lfu *LFUCache) put(key, value int) {
 		fmt.Println(len(lfu.cache))
 		if len(lfu.cache) == lfu.cap {
 			toDelKey := lfu.getEvicKey()
+			log.Printf("被淘汰的key:%d\n", toDelKey)
 			delete(lfu.cache, toDelKey)
 		}
 		//新增
