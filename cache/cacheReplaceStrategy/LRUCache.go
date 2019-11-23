@@ -2,7 +2,6 @@ package main
 
 import (
 	"errors"
-	"fmt"
 )
 
 type LRUCache struct {
@@ -77,7 +76,7 @@ func (s *LRUCache) contains(dataItem int) bool {
 	}
 }
 
-func main() {
+/*func main() {
 	lruCache := NewLRUCache(4)
 	inputItem := []int{1, 2, 3, 4, 5, 5, 5, 4, 3, 2, 1, 1, 1, 3, 1}
 
@@ -88,3 +87,4 @@ func main() {
 	}
 
 }
+*/

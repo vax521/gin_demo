@@ -2,33 +2,33 @@ package main
 
 import . "sort"
 
-type lessFunc func(c1, c2 *cacheValueObj) bool
+type LessFunc func(c1, c2 *cacheValueObj) bool
 
-// multiSorter implements the Sort interface, sorting the changes within.
-type multiSorter struct {
+// MultiSorter implements the Sort interface, sorting the changes within.
+type MultiSorter struct {
 	caches []*cacheValueObj
-	less   []lessFunc
+	less   []LessFunc
 }
 
 // Sort sorts the argument slice according to the less functions passed to OrderedBy.
-func (ms *multiSorter) Sort(caches []*cacheValueObj) {
+func (ms *MultiSorter) Sort(caches []*cacheValueObj) {
 	ms.caches = caches
 	Sort(ms)
 }
 
 // OrderedBy returns a Sorter that sorts using the less functions, in order.
 // Call its Sort method to sort the data.
-func OrderedBy(less ...lessFunc) *multiSorter {
-	return &multiSorter{
+func OrderedBy(less ...LessFunc) *MultiSorter {
+	return &MultiSorter{
 		less: less,
 	}
 }
 
 // Len is part of sort.Interface.
-func (ms *multiSorter) Len() int {
+func (ms *MultiSorter) Len() int {
 	return len(ms.caches)
 }
-func (ms *multiSorter) Less(i, j int) bool {
+func (ms *MultiSorter) Less(i, j int) bool {
 	p, q := ms.caches[i], ms.caches[j]
 	// Try all but the last comparison.
 	var k int
@@ -50,6 +50,6 @@ func (ms *multiSorter) Less(i, j int) bool {
 }
 
 // Swap is part of sort.Interface.
-func (ms *multiSorter) Swap(i, j int) {
+func (ms *MultiSorter) Swap(i, j int) {
 	ms.caches[i], ms.caches[j] = ms.caches[j], ms.caches[i]
 }
