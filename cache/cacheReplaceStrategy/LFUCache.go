@@ -80,6 +80,7 @@ func (lfu *LFUCache) put(key, value int) {
 
 func (lfu *LFUCache) getEvicKey() int {
 	objList := lfu.values()
+	//按访问次数从高到底排序
 	decrHitcount := func(c1, c2 *cacheValueObj) bool {
 		return c1.hitCount > c2.hitCount
 	}
@@ -117,5 +118,8 @@ func main() {
 	lfuCache.printCacheDetails()
 	time.Sleep(time.Second)
 	lfuCache.put(4, 4)
+	time.Sleep(time.Second)
+	lfuCache.printCacheDetails()
+	lfuCache.put(5, 5)
 	lfuCache.printCacheDetails()
 }
