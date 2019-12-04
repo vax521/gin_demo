@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"math/rand"
 	"sync"
 	"time"
 )
@@ -50,10 +49,10 @@ var eb = &EventBus{
 }
 
 func publishTo(topic string, data string) {
-
-	eb.Publish(topic, data)
-	time.Sleep(time.Duration(rand.Intn(1000)) * time.Millisecond)
-
+	for {
+		eb.Publish(topic, data)
+		time.Sleep(5 * time.Second)
+	}
 }
 
 func printDataEvent(ch string, data DataEvent) {
@@ -87,8 +86,8 @@ func main() {
 			{
 				go printDataEvent("ch3", d)
 			}
+
 		}
 	}
-	time.Sleep(time.Second)
 
 }
