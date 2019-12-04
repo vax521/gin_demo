@@ -30,6 +30,22 @@ func (bitmap *BitMap) Add(num uint) {
 	bitmap.bits[index] |= 1 << pos
 }
 
+//判断一个数字是否在位图
+//找到数字所在的位置,然后做与运算
+func (bitmap *BitMap) IsExist(num uint) bool {
+	index := num >> 3
+	pos := num & 0x07
+	return bitmap.bits[index]&(1<<pos) != 0
+}
+
+//删除一个数字在位图
+//找到数字所在的位置 取反,然后与索引下的数字做与运算
+func (b *BitMap) Remove(num uint) {
+	index := num >> 3
+	pos := num & 0x07
+	b.bits[index] = b.bits[index] & ^(1 << pos)
+}
+
 func main() {
 	bitmap := NewBitMap(9)
 	bitmap.Add(0)
