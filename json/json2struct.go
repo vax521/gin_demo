@@ -37,6 +37,11 @@ func main() {
 		panic(err)
 	}
 	fmt.Println(e)
+
+	if data, err := json.Marshal(e); err == nil {
+		fmt.Println(string(data))
+	}
+
 	if e.Table == "blogs" {
 		var blogs []Blog
 		//if err:= mapstructure.Decode(e.Data,&blogs); err!=nil{
