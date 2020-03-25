@@ -1,0 +1,2 @@
+使用singleFlight防止缓存击穿
+[参考资料]("https://mp.weixin.qq.com/s?__biz=MzAxMTA4Njc0OQ==&mid=2651438926&idx=4&sn=225160a2728b905d7c2b494edf90d7d6&chksm=80bb61bcb7cce8aa530eae5372478ff97f56a27d4b4231ec6b577edfae027d16a027f42c0c5a&mpshare=1&scene=1&srcid=032598s3KWOqUfdinU5kDZZB&sharer_sharetime=1585118734355&sharer_shareid=26f90233aaca457c116a35751fe88b75&exportkey=AZEQVcTsnrBxLm2hq7WFX6k%3D&pass_ticket=F4H7joldVcNfSIoNBtWswsJoWb%2B5W8IbYxcNuPbgY1SG%2Fg5eQOh4jMiwcL2vYMmb#rd")
