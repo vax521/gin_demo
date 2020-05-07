@@ -1,0 +1,4 @@
+https://changelog.com/gotime/128
+
+//保存UI截图
+go run kitchen.go -screenshot screenshot.jpg
