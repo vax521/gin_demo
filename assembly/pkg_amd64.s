@@ -1,0 +1,2 @@
+GLOBL  .Id(SB),$8
+DATA .Id+0(SB)/,$0x37
