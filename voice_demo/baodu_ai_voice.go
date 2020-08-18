@@ -11,8 +11,8 @@ var apiKey, apiSecret string
 var client *voice.VoiceClient
 
 func init() {
-	apiKey = "xQr8wlnW9nKwQIrF6t9fwoQR"
-	apiSecret = "SYOXr7KskiGKnn0xO5T0SPkQ1xq7qVmA"
+	apiKey = "kVcnfD9iW2XVZSMaLMrtLYIz"
+	apiSecret = "O9o1O213UgG5LFn0bDGNtoRN3VWl2du6"
 	client = voice.NewVoiceClient(apiKey, apiSecret)
 }
 
@@ -21,13 +21,15 @@ func txtToVoice(text string, fileName string) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	if err := writeBytesToFile(bts, fileName); err != nil { //writeBytesToFile需要自己实现
-		log.Fatal(err)
-	}
+	writeBytesToFile(bts, fileName)
 }
 
-func writeBytesToFile(voiceByteArray []byte, fileName string) error {
-	return nil
+func writeBytesToFile(voiceByteArray []byte, fileName string) {
+	file, err := os.Create(fileName)
+	if err != nil {
+		log.Println(err)
+	}
+	file.Write(voiceByteArray)
 }
 
 func SpeechToText() {
@@ -35,14 +37,14 @@ func SpeechToText() {
 		log.Fatal(err)
 	}
 
-	f, err := os.OpenFile("16k.pcm", os.O_RDONLY, 0666)
+	f, err := os.OpenFile("F:\\go_demo\\backend\\gin_demo\\voice_demo\\16k.wav", os.O_RDONLY, 0666)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	rs, err := client.SpeechToText(
 		f,
-		voice.Format("pcm"),
+		voice.Format("wav"),
 		voice.Channel(1),
 	)
 	if err != nil {
@@ -51,5 +53,6 @@ func SpeechToText() {
 	fmt.Println(rs)
 }
 func main() {
-	SpeechToText()
+	//SpeechToText()
+	txtToVoice("dd", "result.wav")
 }
