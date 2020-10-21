@@ -291,3 +291,7 @@ func main() {
 	cancel()
 	wg.Wait()
 }
+# 定时器
+我们刚才其实已经接触了信道作为定时器, time包里的After会制作一个定时器。
+
+https://blog.csdn.net/u013474436/article/details/86651335
